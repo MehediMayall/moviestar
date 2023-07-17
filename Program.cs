@@ -4,6 +4,7 @@
 
 // Global namespaces
 global using Microsoft.EntityFrameworkCore;
+global using MovieStar.Models;
 
 // Program
 
@@ -11,10 +12,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddDbContext<ModelContext>(options=>{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("default"));
+});
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
