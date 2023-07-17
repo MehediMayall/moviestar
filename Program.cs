@@ -1,3 +1,12 @@
+// Author: Mehedi
+// CreatedOn: 17 Jul 2023
+
+
+// Global namespaces
+global using Microsoft.EntityFrameworkCore;
+
+// Program
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
