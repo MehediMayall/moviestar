@@ -10,7 +10,7 @@ using MovieStar.Models;
 
 namespace moviestar.Migrations
 {
-    [DbContext(typeof(ModelContext))]
+    [DbContext(typeof(CharacterContext))]
     [Migration("20230717205744_InitialCreate")]
     partial class InitialCreate
     {

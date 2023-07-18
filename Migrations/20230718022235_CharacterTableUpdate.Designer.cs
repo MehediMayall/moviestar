@@ -10,7 +10,7 @@ using MovieStar.Models;
 
 namespace moviestar.Migrations
 {
-    [DbContext(typeof(ModelContext))]
+    [DbContext(typeof(CharacterContext))]
     [Migration("20230718022235_CharacterTableUpdate")]
     partial class CharacterTableUpdate
     {

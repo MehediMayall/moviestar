@@ -11,7 +11,7 @@ using MovieStar.Models;
 
 namespace moviestar.Migrations
 {
-    [DbContext(typeof(ModelContext))]
+    [DbContext(typeof(CharacterContext))]
     [Migration("20230718025024_BaseClass_Movie")]
     partial class BaseClass_Movie
     {
