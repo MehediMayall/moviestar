@@ -2,9 +2,9 @@ using System;
 
 namespace MovieStar.Models
 {
-    public class ModelContext: DbContext{
+    public class CharacterContext: DbContext{
 
-        public ModelContext(DbContextOptions<ModelContext> options) : base(options)
+        public CharacterContext(DbContextOptions<CharacterContext> options) : base(options)
         {
             
 

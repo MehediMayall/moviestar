@@ -5,6 +5,9 @@
 // Global namespaces
 global using Microsoft.EntityFrameworkCore;
 global using MovieStar.Models;
+global using MovieStar.Dto;
+global using MovieStar.Services;
+
 
 // Program
 
@@ -12,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<ModelContext>(options=>{
+builder.Services.AddDbContext<CharacterContext>(options=>{
     options.UseSqlServer(builder.Configuration.GetConnectionString("default"));
 });
 
