@@ -13,5 +13,7 @@ namespace MovieStar.Models
         public int Defense { get; set; }
         public int Intelligence { get; set; }
 
+        public ICollection<Movie>? Movies {get; set;} 
+
     }
 }
