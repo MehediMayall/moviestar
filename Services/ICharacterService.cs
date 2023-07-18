@@ -2,6 +2,6 @@ namespace MovieStar.Services
 {
     public interface ICharacterService
     {
-        Task<List<Character>> getAll();
+        Task<List<CharacterDto>> getAll();
     }
 }
