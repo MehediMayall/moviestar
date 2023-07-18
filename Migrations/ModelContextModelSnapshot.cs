@@ -10,7 +10,7 @@ using MovieStar.Models;
 
 namespace moviestar.Migrations
 {
-    [DbContext(typeof(ModelContext))]
+    [DbContext(typeof(CharacterContext))]
     partial class ModelContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

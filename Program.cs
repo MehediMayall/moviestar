@@ -25,6 +25,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+
+// Register Services
+builder.Services.AddScoped<ICharacterService, CharacterService>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
