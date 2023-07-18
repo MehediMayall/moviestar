@@ -6,6 +6,7 @@ namespace MovieStar
         {
             CreateMap<CharacterDto, Character>();
             CreateMap<Character, CharacterDto>();
+            CreateMap<CharacterAddDto, Character>();
         }
     }
 }
