@@ -7,6 +7,8 @@ global using Microsoft.EntityFrameworkCore;
 global using MovieStar.Models;
 global using MovieStar.Dto;
 global using MovieStar.Services;
+global using AutoMapper;
+
 
 
 // Program
@@ -23,7 +25,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 
 // Register Services
