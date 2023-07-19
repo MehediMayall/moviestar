@@ -26,5 +26,17 @@ namespace MovieStar.Controllers
         {
             return getResponse(await this.service.getAll());
         }
+
+
+        [HttpPost]
+        [Route("api/character/save")]
+        public async Task<ActionResult<ResponseDto>> save(CharacterAddDto NewCharacter)
+        {
+            try
+            {
+                return getResponse(await this.service.save(NewCharacter));
+            }
+            catch (System.Exception ex){ return getResponse(ex.Message); }
+        }
     }
 }
