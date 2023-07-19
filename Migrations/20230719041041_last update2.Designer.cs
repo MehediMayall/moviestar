@@ -12,8 +12,8 @@ using MovieStar.Models;
 namespace moviestar.Migrations
 {
     [DbContext(typeof(CharacterContext))]
-    [Migration("20230718104327_Added movie table")]
-    partial class Addedmovietable
+    [Migration("20230719041041_last update2")]
+    partial class lastupdate2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,62 +71,6 @@ namespace moviestar.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Characters");
-                });
-
-            modelBuilder.Entity("MovieStar.Models.Movie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CharacterId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedByID")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<DateTime>("ReleasedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedByID")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CharacterId");
-
-                    b.ToTable("Movies");
-                });
-
-            modelBuilder.Entity("MovieStar.Models.Movie", b =>
-                {
-                    b.HasOne("MovieStar.Models.Character", null)
-                        .WithMany("Movies")
-                        .HasForeignKey("CharacterId");
-                });
-
-            modelBuilder.Entity("MovieStar.Models.Character", b =>
-                {
-                    b.Navigation("Movies");
                 });
 #pragma warning restore 612, 618
         }
