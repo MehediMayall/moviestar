@@ -17,6 +17,6 @@ namespace MovieStar.Models
         public int Intelligence { get; set; }
 
         public ICollection<Movie>? Movies {get; set;} 
-
+        public User? User { get; set; }
     }
 }

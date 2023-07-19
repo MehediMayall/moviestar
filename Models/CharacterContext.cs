@@ -12,5 +12,7 @@ namespace MovieStar.Models
 
         public DbSet<Character> Characters => Set<Character>();
         public DbSet<Movie> Movies => Set<Movie>();
+
+        public DbSet<User> Users => Set<User>();
     }
 }
