@@ -18,6 +18,9 @@ namespace MovieStar.Services
 
         public async Task<UserDto> RegisterUser(UserAddDto NewUser)
         {
+            // Checking if user already exists
+            if(await this.repo.getUserByEmail(NewUser.Email) !=null) throw new Exception($"An user already exist with this email id -> {NewUser.Email}. Please select different email."); 
+
              User newUser =  this.mapper.Map<User>(NewUser);
              
              new Security().createPasswordHash(NewUser.Password, out byte[]PasswordHash, out byte[] PasswordSalt );

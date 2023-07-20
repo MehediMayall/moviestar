@@ -16,7 +16,7 @@ namespace MovieStar.Controllers
         {
             try
             { 
-                if(!ModelState.IsValid) throw new Exception($"Please enter username and password. {NewUser.Username}");
+                if(!ModelState.IsValid) throw new Exception($"Please enter username and password.");
                 return getResponse(await this.service.RegisterUser(NewUser));
             }   
             catch(Exception ex){ return getResponse(ex);}
@@ -28,7 +28,7 @@ namespace MovieStar.Controllers
         {
             try
             { 
-                if(!ModelState.IsValid) throw new Exception($"Please enter username and password. {NewUser.Username}");
+                if(!ModelState.IsValid) throw new Exception($"Please enter username and password.");
                 return getResponse(await this.service.RegisterUser(NewUser));
             }   
             catch(Exception ex){ return getResponse(ex);}
