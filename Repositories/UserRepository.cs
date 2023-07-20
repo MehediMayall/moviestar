@@ -13,8 +13,8 @@ namespace MovieStar.Repositories
         }
 
         
-        public async Task<User> getUserByUserName(string userName){
-            return await dbContext.Users.FirstOrDefaultAsync(u => u.Username == userName);
+        public async Task<User> getUserByEmail(string Email){
+            return await dbContext.Users.FirstOrDefaultAsync(u => u.Email == Email);
         }        
         
         public async Task<User> save(User user){

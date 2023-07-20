@@ -30,6 +30,7 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 // Register Services
 builder.Services.AddScoped<ICharacterService, CharacterService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 var app = builder.Build();
