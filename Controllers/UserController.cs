@@ -16,9 +16,23 @@ namespace MovieStar.Controllers
         {
             try
             { 
-                if(!ModelState.IsValid) throw new Exception("Please enter username and password");
+                if(!ModelState.IsValid) throw new Exception($"Please enter username and password. {NewUser.Username}");
                 return getResponse(await this.service.RegisterUser(NewUser));
-            }catch(Exception ex){ return getResponse(ex);}
+            }   
+            catch(Exception ex){ return getResponse(ex);}
         }
+        
+        [HttpPost]
+        [Route("/api/user/login")]
+        public async Task<ActionResult<ResponseDto>> login(UserAddDto NewUser)
+        {
+            try
+            { 
+                if(!ModelState.IsValid) throw new Exception($"Please enter username and password. {NewUser.Username}");
+                return getResponse(await this.service.RegisterUser(NewUser));
+            }   
+            catch(Exception ex){ return getResponse(ex);}
+        }
+        
     }
 }

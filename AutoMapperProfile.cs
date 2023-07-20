@@ -11,6 +11,7 @@ namespace MovieStar
 
             // User
             CreateMap<UserAddDto, User>();
+            CreateMap<User, UserDto>();
         }
     }
 }

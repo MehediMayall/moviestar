@@ -16,7 +16,7 @@ namespace MovieStar.Services
         }
 
 
-        public async Task<User> RegisterUser(UserAddDto NewUser)
+        public async Task<UserDto> RegisterUser(UserAddDto NewUser)
         {
              User newUser =  this.mapper.Map<User>(NewUser);
              
@@ -24,7 +24,7 @@ namespace MovieStar.Services
              newUser.PasswordSalt = PasswordSalt;
              newUser.PasswordHash = PasswordHash;
 
-             return await this.repo.save(newUser);
+             return this.mapper.Map<UserDto>( await this.repo.save(newUser));
         }
 
 
