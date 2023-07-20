@@ -16,12 +16,11 @@ namespace MovieStar.Services
         }
 
 
-        public async Task<User> registerUser(UserAddDto NewUser)
+        public async Task<User> RegisterUser(UserAddDto NewUser)
         {
              User newUser =  this.mapper.Map<User>(NewUser);
-             byte[] PasswordHash, PasswordSalt;
              
-             new Security().createPasswordHash(NewUser.Password, out PasswordHash, out  PasswordSalt );
+             new Security().createPasswordHash(NewUser.Password, out byte[]PasswordHash, out byte[] PasswordSalt );
              newUser.PasswordSalt = PasswordSalt;
              newUser.PasswordHash = PasswordHash;
 

@@ -1,6 +1,6 @@
 namespace MovieStar.Services
 {
     public interface IUserService{
-        Task<User> registerUser(UserAddDto NewUser);
+        Task<User> RegisterUser(UserAddDto NewUser);
     }
 }
