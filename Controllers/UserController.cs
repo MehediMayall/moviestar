@@ -10,6 +10,8 @@ namespace MovieStar.Controllers
             this.service = service;
         }
 
+        [HttpPost]
+        [Route("/api/user/save")]
         public async Task<ActionResult<ResponseDto>> RegisterUser(UserAddDto NewUser)
         {
             try
