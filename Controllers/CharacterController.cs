@@ -19,13 +19,15 @@ namespace MovieStar.Controllers
         [Route("api/test")]
         public async Task<ActionResult<ResponseDto>> apiTest()
         {
-            return getResponse("API Works");
+            var user = GetSessionUser();
+            return getResponse(user.Email);
         }
 
         [HttpGet]
         [Route("api/character/all")]
         public async Task<ActionResult<ResponseDto>> getAll()
         {
+
             return getResponse(await this.service.getAll());
         }
 
@@ -36,6 +38,7 @@ namespace MovieStar.Controllers
         {
             try
             {
+                NewCharacter.CreatedByID = GetSessionUser().Id;    
                 return getResponse(await this.service.save(NewCharacter));
             }
             catch (System.Exception ex){ return getResponse(ex.Message); }

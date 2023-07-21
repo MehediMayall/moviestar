@@ -1,4 +1,6 @@
 
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MovieStar.Controllers
@@ -6,6 +8,15 @@ namespace MovieStar.Controllers
 
     public abstract class BaseController : Controller
     {
+
+        protected SessionUserDto GetSessionUser()
+        {
+            if(User.Claims==null) throw  new Exception("Invalid login signature. Please login");
+            return new SessionUserDto{
+                Id = int.Parse(User.Claims.FirstOrDefault(c=> c.Type == ClaimTypes.NameIdentifier).Value),
+                Email = User.Claims.FirstOrDefault(c=> c.Type == ClaimTypes.Name).Value
+            };
+        }
 
         protected ActionResult<ResponseDto> getResponse(object Data)
         {
