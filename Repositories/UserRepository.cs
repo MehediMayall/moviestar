@@ -9,7 +9,7 @@ namespace MovieStar.Repositories
         }
 
         public async Task<User> getUserByID(int id){
-            return await dbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+            return await dbContext.Users.Include(c=> c.Characters).FirstOrDefaultAsync(u => u.Id == id);
         }
 
         
