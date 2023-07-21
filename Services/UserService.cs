@@ -8,11 +8,14 @@ namespace MovieStar.Services
         private readonly CharacterContext context;
         private readonly IMapper mapper;
         private readonly UserRepository repo;
-        public UserService(CharacterContext context, IMapper mapper)
+        private readonly IConfiguration config;
+
+        public UserService(CharacterContext context, IMapper mapper, IConfiguration config)
         {
             this.context = context;
             this.mapper = mapper;
             this.repo = new UserRepository(context);
+            this.config = config;
         }
 
 
@@ -30,7 +33,7 @@ namespace MovieStar.Services
              return this.mapper.Map<UserDto>( await this.repo.save(newUser));
         }
 
-        public async Task<UserDto> AuthenticateUser(LoginDto loginDto)
+        public async Task<LoginResponseDto> AuthenticateUser(LoginDto loginDto)
         {
             User user = await this.repo.getUserByEmail(loginDto.Email);
             // Checking if user already exists
@@ -40,7 +43,12 @@ namespace MovieStar.Services
                 throw new Exception("Invalid user email or password.");
             } 
 
-            return this.mapper.Map<UserDto>( user);
+            var token = new Security().createToken(user, this.config.GetSection("AppKey").Value.ToString());
+
+            return new LoginResponseDto{
+                token = token,
+                user = this.mapper.Map<UserDto>(user),
+            };
         }
 
     }
