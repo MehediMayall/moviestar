@@ -9,10 +9,10 @@ namespace MovieStar.Models
 
         [Required]
         [StringLength(10, MinimumLength =2)]
-        public string CreatedByID { get; set; } = string.Empty;
+        public int CreatedByID { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         [StringLength(10)]
-        public string? UpdatedByID { get; set; }
+        public int? UpdatedByID { get; set; }
         public DateTime UpdatedOn { get; set; } 
     }
 }

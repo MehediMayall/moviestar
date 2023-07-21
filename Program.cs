@@ -8,6 +8,10 @@ global using MovieStar.Models;
 global using MovieStar.Dto;
 global using MovieStar.Services;
 global using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 
 
@@ -26,6 +30,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddHttpContextAccessor();
+
+
+
+/// JWT
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+    options =>{
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters{
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppKey").Value.ToString())),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+        };
+    }
+);
 
 
 // Register Services
@@ -44,6 +63,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

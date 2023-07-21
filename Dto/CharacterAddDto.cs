@@ -11,6 +11,6 @@ namespace MovieStar.Dto
         public int Defense { get; set; }
         public int Intelligence { get; set; }
         [Required]
-        public string? CreatedByID { get; set; }
+        public int CreatedByID { get; set; }
     }
 }
