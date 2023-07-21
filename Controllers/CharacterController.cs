@@ -1,8 +1,10 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MovieStar.Controllers
 {
+    [Authorize]
     public class CharacterController: BaseController
     {
 
