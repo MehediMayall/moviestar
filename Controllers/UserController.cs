@@ -34,5 +34,15 @@ namespace MovieStar.Controllers
             catch(Exception ex){ return getResponse(ex);}
         }
         
+        [HttpGet]
+        [Route("/api/user/detail/{id}")]
+        public async Task<ActionResult<ResponseDto>> getUserDetail(int id)
+        {
+            try
+            {           
+                return getResponse(await service.GetUserDetail(id));
+            }
+            catch(Exception ex){ return getResponse(ex);}
+        }
     }
 }
