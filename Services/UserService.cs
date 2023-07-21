@@ -30,6 +30,18 @@ namespace MovieStar.Services
              return this.mapper.Map<UserDto>( await this.repo.save(newUser));
         }
 
+        public async Task<UserDto> AuthenticateUser(LoginDto loginDto)
+        {
+            User user = await this.repo.getUserByEmail(loginDto.Email);
+            // Checking if user already exists
+            if( user ==null) throw new Exception($"User email does not exists. Please enter a valid email");
+
+            if(!new Security().validatePasswordHash(loginDto.Password, user.PasswordSalt, user.PasswordHash)){
+                throw new Exception("Invalid user email or password.");
+            } 
+
+            return this.mapper.Map<UserDto>( user);
+        }
 
     }
 }

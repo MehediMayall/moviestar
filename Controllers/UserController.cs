@@ -24,12 +24,12 @@ namespace MovieStar.Controllers
         
         [HttpPost]
         [Route("/api/user/login")]
-        public async Task<ActionResult<ResponseDto>> login(UserAddDto NewUser)
+        public async Task<ActionResult<ResponseDto>> login(LoginDto loginDto)
         {
             try
             { 
                 if(!ModelState.IsValid) throw new Exception($"Please enter username and password.");
-                return getResponse(await this.service.RegisterUser(NewUser));
+                return getResponse(await this.service.AuthenticateUser(loginDto));
             }   
             catch(Exception ex){ return getResponse(ex);}
         }
