@@ -51,11 +51,12 @@ namespace MovieStar.Services
             };
         }
 
-        public async Task<UserDto> GetUserDetail(int ID)
+        public async Task<User> GetUserDetail(int ID)
         {
             User user = await this.repo.getUserByID(ID);
+            
             if( user == null ) throw new Exception($"User not found for id {ID}");
-            return this.mapper.Map<UserDto>(user);
+            return  user; //this.mapper.Map<UserDto>(user);
         }
     }
 }

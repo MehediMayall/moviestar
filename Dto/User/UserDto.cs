@@ -10,5 +10,7 @@ namespace MovieStar.Dto
         public string Email { get; set; }= string.Empty;
         public string CreatedByID { get; set; }= string.Empty;
         public DateTime CreatedOn { get; set; }
+
+        public List<Character> Characters { get; set; }
     }
 }
