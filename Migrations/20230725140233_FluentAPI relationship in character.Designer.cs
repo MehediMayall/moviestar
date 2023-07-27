@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieStar.Models;
 
@@ -11,9 +12,11 @@ using MovieStar.Models;
 namespace moviestar.Migrations
 {
     [DbContext(typeof(CharacterContext))]
-    partial class ModelContextModelSnapshot : ModelSnapshot
+    [Migration("20230725140233_FluentAPI relationship in character")]
+    partial class FluentAPIrelationshipincharacter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,7 +35,8 @@ namespace moviestar.Migrations
 
                     b.Property<string>("CharacterName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("CreatedByID")
                         .HasMaxLength(10)
@@ -63,11 +67,59 @@ namespace moviestar.Migrations
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedByID");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Characters");
+                });
+
+            modelBuilder.Entity("MovieStar.Models.Movie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CharacterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreatedByID")
+                        .HasMaxLength(10)
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<DateTime>("ReleasedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedByID")
+                        .HasMaxLength(10)
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CharacterId");
+
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("MovieStar.Models.User", b =>
@@ -87,18 +139,21 @@ namespace moviestar.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
@@ -123,12 +178,28 @@ namespace moviestar.Migrations
             modelBuilder.Entity("MovieStar.Models.Character", b =>
                 {
                     b.HasOne("MovieStar.Models.User", "User")
-                        .WithMany("Characters")
+                        .WithMany()
                         .HasForeignKey("CreatedByID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MovieStar.Models.User", null)
+                        .WithMany("Characters")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MovieStar.Models.Movie", b =>
+                {
+                    b.HasOne("MovieStar.Models.Character", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("CharacterId");
+                });
+
+            modelBuilder.Entity("MovieStar.Models.Character", b =>
+                {
+                    b.Navigation("Movies");
                 });
 
             modelBuilder.Entity("MovieStar.Models.User", b =>

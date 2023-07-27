@@ -1,19 +1,18 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MovieStar.Models
+namespace MovieStar.Models;
+
+public class Movie : BaseModel
 {
-    public class Movie : BaseModel
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
-        [Required]
-        [StringLength(10)]
-        public string Name { get; set; } = null!;
+    [Required]
+    [StringLength(10)]
+    public string Name { get; set; } = null!;
 
-        [Required]
-        public DateTime ReleasedDate { get; set; }
-    }
+    [Required]
+    public DateTime ReleasedDate { get; set; }
 }
