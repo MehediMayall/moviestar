@@ -3,7 +3,7 @@ namespace MovieStar.Services
     public interface IUserService{
         Task<UserDto> RegisterUser(UserAddDto NewUser);
         Task<LoginResponseDto> AuthenticateUser(LoginDto loginDto);
-        Task<User> GetUserDetail(int ID);
+        Task<UserDto> GetUserDetail(int ID);
 
     }
 }
