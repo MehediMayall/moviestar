@@ -12,8 +12,8 @@ using MovieStar.Models;
 namespace moviestar.Migrations
 {
     [DbContext(typeof(CharacterContext))]
-    [Migration("20230727055144_added country table")]
-    partial class addedcountrytable
+    [Migration("20230727070155_added countryid")]
+    partial class addedcountryid
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

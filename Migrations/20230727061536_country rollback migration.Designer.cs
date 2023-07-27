@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieStar.Models;
 
@@ -11,9 +12,11 @@ using MovieStar.Models;
 namespace moviestar.Migrations
 {
     [DbContext(typeof(CharacterContext))]
-    partial class ModelContextModelSnapshot : ModelSnapshot
+    [Migration("20230727061536_country rollback migration")]
+    partial class countryrollbackmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,8 +75,6 @@ namespace moviestar.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
 
                     b.HasIndex("CreatedByID");
 
@@ -180,26 +181,13 @@ namespace moviestar.Migrations
 
             modelBuilder.Entity("MovieStar.Models.Character", b =>
                 {
-                    b.HasOne("MovieStar.Models.Country", "Country")
-                        .WithMany("Characters")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("MovieStar.Models.User", "User")
                         .WithMany("Characters")
                         .HasForeignKey("CreatedByID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Country");
-
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("MovieStar.Models.Country", b =>
-                {
-                    b.Navigation("Characters");
                 });
 
             modelBuilder.Entity("MovieStar.Models.User", b =>

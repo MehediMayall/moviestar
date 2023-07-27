@@ -33,7 +33,7 @@ public class CharacterContext: DbContext{
 
         // Country ID
         builder.Entity<Character>().HasOne(e=> e.Country).WithMany(e=> e.Characters)
-            .HasForeignKey(e=> e.CountryId).IsRequired();
+            .HasForeignKey(e=> e.CountryId).OnDelete(DeleteBehavior.NoAction).IsRequired();
 
         builder.Entity<Character>().Property(e=> e.CharacterName).HasMaxLength(100).IsRequired();
         builder.Entity<Character>().Property(e=> e.CreatedOn).HasDefaultValueSql("GETDATE()");

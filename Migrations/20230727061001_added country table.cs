@@ -69,8 +69,7 @@ namespace moviestar.Migrations
                 name: "CountryId",
                 table: "Characters",
                 type: "int",
-                nullable: false,
-                defaultValue: 0);
+                nullable: true);
 
             migrationBuilder.CreateTable(
                 name: "Countries",
@@ -112,8 +111,7 @@ namespace moviestar.Migrations
                 table: "Characters",
                 column: "CountryId",
                 principalTable: "Countries",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />

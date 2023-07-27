@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MovieStar.Models;
 
@@ -13,5 +14,7 @@ public abstract class  BaseModel
     public DateTime CreatedOn { get; set; } = DateTime.Now;
     [StringLength(10)]
     public int? UpdatedByID { get; set; }
+
+    [AllowNull]
     public DateTime UpdatedOn { get; set; } 
 }
