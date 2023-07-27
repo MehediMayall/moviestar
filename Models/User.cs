@@ -11,4 +11,5 @@ public class User: BaseModel
     public byte[] PasswordSalt { get; set; } = new byte[0];
 
     public List<Character>? Characters { get; set; }
+    public List<Movie>? Movies { get; set; }
 }

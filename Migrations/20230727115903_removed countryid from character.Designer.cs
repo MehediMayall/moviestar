@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieStar.Models;
 
@@ -11,9 +12,11 @@ using MovieStar.Models;
 namespace moviestar.Migrations
 {
     [DbContext(typeof(CharacterContext))]
-    partial class ModelContextModelSnapshot : ModelSnapshot
+    [Migration("20230727115903_removed countryid from character")]
+    partial class removedcountryidfromcharacter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,6 +37,9 @@ namespace moviestar.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("CountryId")
+                        .HasColumnType("int");
 
                     b.Property<int>("CreatedByID")
                         .HasMaxLength(10)
@@ -69,6 +75,8 @@ namespace moviestar.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
 
                     b.HasIndex("CreatedByID");
 
@@ -115,51 +123,6 @@ namespace moviestar.Migrations
                         .IsUnique();
 
                     b.ToTable("Countries");
-                });
-
-            modelBuilder.Entity("MovieStar.Models.Movie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CountryID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CreatedByID")
-                        .HasMaxLength(10)
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("ReleasedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UpdatedByID")
-                        .HasMaxLength(10)
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CountryID");
-
-                    b.HasIndex("CreatedByID");
-
-                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("MovieStar.Models.User", b =>
@@ -220,6 +183,10 @@ namespace moviestar.Migrations
 
             modelBuilder.Entity("MovieStar.Models.Character", b =>
                 {
+                    b.HasOne("MovieStar.Models.Country", null)
+                        .WithMany("Characters")
+                        .HasForeignKey("CountryId");
+
                     b.HasOne("MovieStar.Models.User", "User")
                         .WithMany("Characters")
                         .HasForeignKey("CreatedByID")
@@ -229,33 +196,14 @@ namespace moviestar.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MovieStar.Models.Movie", b =>
-                {
-                    b.HasOne("MovieStar.Models.Country", null)
-                        .WithMany("Movies")
-                        .HasForeignKey("CountryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MovieStar.Models.User", "User")
-                        .WithMany("Movies")
-                        .HasForeignKey("CreatedByID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("MovieStar.Models.Country", b =>
                 {
-                    b.Navigation("Movies");
+                    b.Navigation("Characters");
                 });
 
             modelBuilder.Entity("MovieStar.Models.User", b =>
                 {
                     b.Navigation("Characters");
-
-                    b.Navigation("Movies");
                 });
 #pragma warning restore 612, 618
         }

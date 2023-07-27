@@ -15,7 +15,7 @@ public class CharacterContext: DbContext{
 
     // Models
     public DbSet<Character> Characters => Set<Character>();
-    // public DbSet<Movie> Movies => Set<Movie>();
+    public DbSet<Movie> Movies => Set<Movie>();
     public DbSet<Country> Countries => Set<Country>();
     public DbSet<User> Users => Set<User>();
 
@@ -31,9 +31,9 @@ public class CharacterContext: DbContext{
         builder.Entity<Character>().HasOne(e=> e.User).WithMany(e=> e.Characters)
             .HasForeignKey(e=> e.CreatedByID).IsRequired();
 
-        // Country ID
-        builder.Entity<Character>().HasOne(e=> e.Country).WithMany(e=> e.Characters)
-            .HasForeignKey(e=> e.CountryId).OnDelete(DeleteBehavior.NoAction).IsRequired();
+        // // Country ID
+        // builder.Entity<Character>().HasOne(e=> e.Country).WithMany(e=> e.Characters)
+        //     .HasForeignKey(e=> e.CountryId).OnDelete(DeleteBehavior.NoAction).IsRequired();
 
         builder.Entity<Character>().Property(e=> e.CharacterName).HasMaxLength(100).IsRequired();
         builder.Entity<Character>().Property(e=> e.CreatedOn).HasDefaultValueSql("GETDATE()");
@@ -46,6 +46,15 @@ public class CharacterContext: DbContext{
         builder.Entity<Country>().HasIndex(e=> e.CountryName).IsUnique();
         builder.Entity<Country>().Property(e=> e.IsActive).HasDefaultValue(true);
         builder.Entity<Country>().Property(e=> e.CreatedOn).HasDefaultValueSql("GETDATE()");
+
+
+        // Movie
+        builder.Entity<Movie>().HasKey(e=> e.Id);
+        builder.Entity<Movie>().HasOne(e=> e.User).WithMany(e=> e.Movies).HasForeignKey(e=> e.CreatedByID).IsRequired();
+        builder.Entity<Movie>().Property(e=> e.Name).HasMaxLength(100).IsRequired();
+
+
+
 
         // User
         builder.Entity<User>().HasKey(e=> e.Id);
