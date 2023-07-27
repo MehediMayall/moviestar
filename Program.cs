@@ -9,7 +9,6 @@ global using MovieStar.Dto;
 global using MovieStar.Services;
 global using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 

@@ -1,18 +1,17 @@
-namespace MovieStar
-{
-    public class AutoMapperProfile : Profile
-    {
-        public AutoMapperProfile()
-        {
-            // Character
-            CreateMap<CharacterDto, Character>();
-            CreateMap<Character, CharacterDto>();
-            CreateMap<CharacterAddDto, Character>();
+namespace MovieStar;
 
-            // User
-            CreateMap<UserAddDto, User>();
-            CreateMap<User, UserDto>();
-                
-        }
+public class AutoMapperProfile : Profile
+{
+    public AutoMapperProfile()
+    {
+        // Character
+        CreateMap<CharacterDto, Character>();
+        CreateMap<Character, CharacterDto>();
+        CreateMap<CharacterAddDto, Character>();
+
+        // User
+        CreateMap<UserAddDto, User>();
+        CreateMap<User, UserDto>();
+            
     }
 }
